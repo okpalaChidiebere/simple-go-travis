@@ -11,7 +11,7 @@ install:
 
 # Scripts to be run such as tests
 before_script:
-  - echo "no tests"
+  - go test -v
 
 script:
   - docker --version # print the version for logging
@@ -19,5 +19,5 @@ script:
   - docker tag simple-go-travis aluminetchidiebre/simple-go-travis:latest
 
 after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin #we pipe the env variable $DOCKER_PASSWORD into the next docker login command so the password will not be really printed out in the logs. We don't want secrets to be printed on logs :)
   - docker push aluminetchidiebre/simple-go-travis
