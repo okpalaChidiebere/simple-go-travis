@@ -6,8 +6,7 @@ service:
   - docker
 
 env:
-  - DOCKER_USERNAME_ENV=aluminetchidiebre
-  - DOCKER_REPO_NAME="simple-go-travis"
+  - DOCKER_USERNAME_ENV=aluminetchidiebre DOCKER_REPO_NAME="simple-go-travis"
 
 # Pre-testing installs
 install:
