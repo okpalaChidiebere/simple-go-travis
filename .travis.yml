@@ -5,6 +5,10 @@ go:
 service:
   - docker
 
+env:
+  - DOCKER_USERNAME_ENV=aluminetchidiebre
+  - DOCKER_REPO=simple-go-travis
+
 # Pre-testing installs
 install:
   - echo "nothing needs to be installed"
@@ -15,9 +19,9 @@ before_script:
 
 script:
   - docker --version # print the version for logging
-  - docker build -t simple-go-travis .
-  - docker tag simple-go-travis aluminetchidiebre/simple-go-travis:latest
+  - docker build -t $DOCKER_REPO .
+  - docker tag $DOCKER_REPO ${DOCKER_USERNAME_ENV}/${DOCKER_REPO}:latest
 
 after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin #we pipe the env variable $DOCKER_PASSWORD into the next docker login command so the password will not be really printed out in the logs. We don't want secrets to be printed on logs :)
-  - docker push aluminetchidiebre/simple-go-travis
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin # we pipe the env variable $DOCKER_PASSWORD into the next docker login command so the password will not be really printed out in the logs. We don't want secrets to be printed on logs :)
+  - docker push {DOCKER_USERNAME_ENV}/${DOCKER_REPO}
