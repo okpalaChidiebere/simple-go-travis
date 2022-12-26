@@ -16,7 +16,7 @@ func Test_FavoriteFood(t *testing.T) {
 	}{
 		{
 			name: "Empty FavoriteFood - should return an error",
-			expectedError: errors.New("favoritee food is undefined"),
+			expectedError: errors.New("favorite food is undefined"),
 		},
 		{
 			name: "Non Empty FavoriteFood - should not return an error",
